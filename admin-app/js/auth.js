@@ -10,8 +10,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Verify token asynchronously
   try {
-    const { data } = await supabase.from("admin_sessions").select("token").eq("token", sessionToken).limit(1);
-    if (!data || data.length === 0) {
+    const { data, error } = await supabase.from("admin_sessions").select("token").eq("token", sessionToken).limit(1);
+    
+    if (error) {
+      console.error("Auth token verification error (table missing or RLS):", error);
+      // Don't logout if the table is just missing to avoid infinite login loops
+    } else if (!data || data.length === 0) {
       // Token not found in active sessions
       localStorage.removeItem("showpay_admin_session_token");
       window.location.href = "/admin";
