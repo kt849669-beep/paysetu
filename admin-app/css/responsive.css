@@ -58,6 +58,16 @@
   table {
     min-width: 600px; /* Forces horizontal scroll on mobile */
   }
+
+  /* Admin Login Mobile Fit */
+  .admin-login-wrapper {
+    padding: 20px;
+  }
+  
+  .admin-login-box {
+    padding: 30px 20px;
+    border-radius: 12px;
+  }
   
   th, td {
     padding: 10px;
