@@ -9,8 +9,51 @@ document.addEventListener("DOMContentLoaded", () => {
   const saveProfileBtn = document.getElementById("saveProfileBtn");
   const profileMessage = document.getElementById("profileMessage");
   const profileDisplayName = document.getElementById("profileDisplayName");
+  const sessionsTableBody = document.getElementById("sessionsTableBody");
 
   let adminData = null;
+
+  async function fetchSessions() {
+    if (!sessionsTableBody) return;
+    try {
+      const { data, error } = await supabase.from("admin_sessions").select("*").order("last_active", { ascending: false });
+      if (error) throw error;
+      
+      const currentToken = localStorage.getItem("showpay_admin_session_token");
+      sessionsTableBody.innerHTML = "";
+      
+      if (!data || data.length === 0) {
+        sessionsTableBody.innerHTML = '<tr><td colspan="4" style="text-align:center;">No active sessions found</td></tr>';
+        return;
+      }
+      
+      data.forEach(session => {
+        const isCurrent = session.token === currentToken;
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${session.device_info} ${isCurrent ? '<span style="color:#10b981; font-size:12px; margin-left:8px;">(Current)</span>' : ''}</td>
+          <td>${new Date(session.last_active).toLocaleString()}</td>
+          <td>${new Date(session.created_at).toLocaleString()}</td>
+          <td>
+            ${!isCurrent ? `<button class="logout-device-btn admin-btn" data-token="${session.token}" style="background:#ef4444; padding:4px 8px; width:auto; font-size:12px;">Logout Device</button>` : '<span style="color:#6b7280; font-size:12px;">Active</span>'}
+          </td>
+        `;
+        sessionsTableBody.appendChild(tr);
+      });
+      
+      document.querySelectorAll(".logout-device-btn").forEach(btn => {
+        btn.addEventListener("click", async (e) => {
+          const tokenToLogout = e.target.getAttribute("data-token");
+          if (confirm("Are you sure you want to log out this device?")) {
+            await supabase.from("admin_sessions").delete().eq("token", tokenToLogout);
+            fetchSessions();
+          }
+        });
+      });
+    } catch (e) {
+      console.error("Error fetching sessions:", e);
+    }
+  }
 
   async function fetchProfile() {
     try {
@@ -72,6 +115,8 @@ document.addEventListener("DOMContentLoaded", () => {
       };
 
       // If new password provided, update it
+      let newSessionToken = null;
+      let deviceInfo = navigator.userAgent;
       if (profileNewPassword.value) {
         if (profileNewPassword.value.length < 4) {
           showMessage("New password must be at least 4 characters.", "error");
@@ -80,6 +125,11 @@ document.addEventListener("DOMContentLoaded", () => {
           return;
         }
         updateData.admin_password = profileNewPassword.value;
+        newSessionToken = crypto.randomUUID();
+        
+        // Wipe all other sessions from database since password changed
+        await supabase.from("admin_sessions").delete().neq("token", "placeholder_to_delete_all"); // delete all rows essentially, we will insert new one
+        await supabase.from("admin_sessions").insert({ token: newSessionToken, device_info: deviceInfo });
       }
 
       if (adminData) {
@@ -91,8 +141,10 @@ document.addEventListener("DOMContentLoaded", () => {
         await supabase.from("admin_settings").insert(updateData);
       }
 
-      // Update localStorage with new email if changed
-      // (admin login checks localStorage session)
+      // Update localStorage with new token if password was changed
+      if (newSessionToken) {
+        localStorage.setItem("showpay_admin_session_token", newSessionToken);
+      }
       profileDisplayName.textContent = profileName.value;
       profileCurrentPassword.value = "";
       profileNewPassword.value = "";
@@ -102,6 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Refresh data
       fetchProfile();
+      fetchSessions();
     } catch (e) {
       console.error("Error saving profile:", e);
       showMessage("Failed to save profile. Try again.", "error");
@@ -112,4 +165,5 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   fetchProfile();
+  fetchSessions();
 });

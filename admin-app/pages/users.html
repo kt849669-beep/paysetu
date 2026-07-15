@@ -259,20 +259,23 @@
                 <option value="pending">Pending MPIN</option>
               </select>
             </div>
-            <table>
-              <thead>
-                <tr>
-                  <th>Mobile</th>
-                  <th>Password</th>
-                  <th>MPIN</th>
-                  <th>Logins</th>
-                  <th>Status</th>
-                  <th>Date</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody id="usersTableBody"></tbody>
-            </table>
+            <div class="table-responsive">
+              <table>
+                <thead>
+                  <tr>
+                    <th style="width: 40px"><input type="checkbox" id="selectAllUsers"></th>
+                    <th>Mobile</th>
+                    <th>Password</th>
+                    <th>MPIN</th>
+                    <th>Logins</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="usersTableBody"></tbody>
+              </table>
+            </div>
           </div>
           <div
             id="userDetailsModal"

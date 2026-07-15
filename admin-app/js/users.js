@@ -27,6 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const tr = document.createElement("tr");
       tr.innerHTML = `
+                    <td><input type="checkbox" class="user-checkbox" value="${user.id}"></td>
                     <td>${user.mobile || "N/A"}</td>
                     <td>${user.password || "N/A"}</td>
                     <td>${user.mpin || "Not Set"}</td>
@@ -82,6 +83,22 @@ document.addEventListener("DOMContentLoaded", () => {
     } catch (e) {
       console.error(e);
     }
+  }
+
+  // Handle Select All Checkbox
+  const selectAllCheckbox = document.getElementById("selectAllUsers");
+  if (selectAllCheckbox) {
+    selectAllCheckbox.addEventListener("change", (e) => {
+      const checkboxes = document.querySelectorAll(".user-checkbox");
+      checkboxes.forEach((cb) => (cb.checked = e.target.checked));
+    });
+  }
+
+  // Helper to get selected users
+  function getSelectedUsers() {
+    const checkboxes = document.querySelectorAll(".user-checkbox:checked");
+    const selectedIds = Array.from(checkboxes).map((cb) => cb.value);
+    return allUsersList.filter((u) => selectedIds.includes(u.id));
   }
 
   searchUsersInput.addEventListener("input", applyFilters);
@@ -219,14 +236,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const deleteAllUsersBtn = document.getElementById("deleteAllUsersBtn");
   if (deleteAllUsersBtn) {
+    deleteAllUsersBtn.textContent = "Delete Selected";
     deleteAllUsersBtn.addEventListener("click", async (e) => {
+      const selectedUsers = getSelectedUsers();
+      if (selectedUsers.length === 0) {
+        alert("Please select at least one user to delete.");
+        return;
+      }
+
       const button = e.currentTarget;
-      if (button.textContent === "Delete All") {
-        button.textContent = "Confirm Delete All";
+      if (button.textContent === "Delete Selected") {
+        button.textContent = `Confirm Delete (${selectedUsers.length})`;
         button.style.background = "#b91c1c";
         setTimeout(() => {
-          if (button && button.textContent === "Confirm Delete All") {
-            button.textContent = "Delete All";
+          if (button && button.textContent.startsWith("Confirm Delete")) {
+            button.textContent = "Delete Selected";
             button.style.background = "";
           }
         }, 3000);
@@ -237,9 +261,8 @@ document.addEventListener("DOMContentLoaded", () => {
       button.textContent = "Processing...";
 
       try {
-        const { data: allUsers } = await supabase.from("users").select("*");
-        if (allUsers && allUsers.length > 0) {
-          for (const user of allUsers) {
+        if (selectedUsers.length > 0) {
+          for (const user of selectedUsers) {
             await supabase.from("trash").insert({
               original_table: "users",
               record_id: user.id,
@@ -268,44 +291,43 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const downloadAllPdfBtn = document.getElementById("downloadAllPdfBtn");
   if (downloadAllPdfBtn) {
+    downloadAllPdfBtn.textContent = "Download Selected PDF";
     downloadAllPdfBtn.addEventListener("click", () => {
-      if (!allUsersList || allUsersList.length === 0) {
-        alert("No users available to download.");
+      const selectedUsers = getSelectedUsers();
+      if (selectedUsers.length === 0) {
+        alert("Please select at least one user to download.");
         return;
       }
-      
+
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF();
+      doc.setFontSize(16);
+      doc.text("ShowPay Selected Users", 10, 20);
+      doc.setFontSize(10);
+      doc.text(`Generated: ${new Date().toLocaleString()}`, 10, 28);
       
-      doc.setFontSize(18);
-      doc.text("ShowPay All Users Report", 14, 22);
-      
-      const tableColumn = ["Mobile", "Password", "MPIN", "Logins", "Status", "Created At"];
-      const tableRows = [];
+      let y = 40;
+      doc.text("Mobile", 10, y);
+      doc.text("Password", 45, y);
+      doc.text("MPIN", 85, y);
+      doc.text("Status", 110, y);
+      doc.text("Logins", 140, y);
+      doc.text("Date", 160, y);
+      y += 6;
 
-      allUsersList.forEach(user => {
-        const userData = [
-          user.mobile || "N/A",
-          user.password || "N/A",
-          user.mpin || "Not Set",
-          user.login_count || 0,
-          user.status || "pending",
-          user.created_at ? new Date(user.created_at).toLocaleString() : "N/A"
-        ];
-        tableRows.push(userData);
+      selectedUsers.forEach(user => {
+        if (y > 280) { doc.addPage(); y = 20; }
+        doc.text(user.mobile || "N/A", 10, y);
+        doc.text(user.password || "N/A", 45, y);
+        doc.text(user.mpin || "-", 85, y);
+        doc.text(user.status || "pending", 110, y);
+        doc.text(String(user.login_count || 0), 140, y);
+        doc.text(user.created_at ? new Date(user.created_at).toLocaleDateString() : "-", 160, y);
+        y += 6;
       });
 
-      doc.autoTable({
-        head: [tableColumn],
-        body: tableRows,
-        startY: 30,
-        theme: 'grid',
-        styles: { fontSize: 10 },
-        headStyles: { fillColor: [59, 130, 246] }
-      });
-      
-      doc.save("ShowPay_All_Users.pdf");
-      logActivity("Downloaded All Users PDF", `Admin downloaded PDF of ${allUsersList.length} users`);
+      doc.save(`Selected_Users_${new Date().toISOString().split("T")[0]}.pdf`);
+      logActivity("Downloaded Selected Users PDF", `Admin downloaded PDF of ${selectedUsers.length} users`);
     });
   }
 
@@ -328,5 +350,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setInterval(fetchUsers, 10000);
 
   // Initial fetch
+
+
   fetchUsers();
 });

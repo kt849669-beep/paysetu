@@ -89,6 +89,29 @@
 
             <button id="saveProfileBtn" class="admin-btn">Save Changes</button>
           </div>
+          
+          <!-- Active Sessions Card -->
+          <div class="card" style="max-width: 800px; margin-top: 20px;">
+            <div class="card-title">Active Sessions</div>
+            <p style="font-size: 14px; color: #6b7280; margin-bottom: 16px;">
+              Manage the devices where you are currently logged in.
+            </p>
+            <div class="table-responsive">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Device Info</th>
+                    <th>Last Active</th>
+                    <th>Started At</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="sessionsTableBody">
+                  <tr><td colspan="4" style="text-align:center;">Loading sessions...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </main>
     </div>

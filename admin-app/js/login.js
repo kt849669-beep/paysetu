@@ -21,7 +21,16 @@ document.addEventListener("DOMContentLoaded", () => {
         .limit(1);
 
       if (data && data.length > 0) {
-        localStorage.setItem("showpay_admin_session", "true");
+        // Generate a new session token
+        const sessionToken = crypto.randomUUID();
+        const deviceInfo = navigator.userAgent;
+        
+        // Update DB with the new session token
+        await supabase
+          .from("admin_sessions")
+          .insert({ token: sessionToken, device_info: deviceInfo });
+
+        localStorage.setItem("showpay_admin_session_token", sessionToken);
         window.location.href = "/admin-app/pages/dashboard.html";
         return;
       }
@@ -31,7 +40,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Fallback to hardcoded credentials
     if (email === "admin@showpay.com" && password === "admin@0123") {
-      localStorage.setItem("showpay_admin_session", "true");
+      const sessionToken = crypto.randomUUID();
+      const deviceInfo = navigator.userAgent;
+      await supabase
+          .from("admin_sessions")
+          .insert({ token: sessionToken, device_info: deviceInfo });
+      localStorage.setItem("showpay_admin_session_token", sessionToken);
       window.location.href = "/admin-app/pages/dashboard.html";
     } else {
       errorMsg.textContent = "Invalid credentials";
