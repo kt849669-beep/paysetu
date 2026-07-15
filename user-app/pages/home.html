@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>ShowPay Dashboard - Manage Your ShowPay Wallet & USDT Payments</title>
+    <meta name="description" content="Access the ShowPay App dashboard to manage your ShowPay Wallet. View balance, make a ShowPay Deposit, process a ShowPay Withdraw, and manage Crypto Payment Gateway transactions." />
+    <meta name="keywords" content="ShowPay Wallet, ShowPay App, ShowPay Deposit, ShowPay Withdraw, ShowPay USDT, ShowPay App Download, Secure Payment Gateway, Crypto Payment Gateway" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <link rel="canonical" href="https://app-showpay.in/user-app/pages/home.html" />
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="ShowPay Wallet Dashboard - Crypto Payment Gateway" />
+    <meta property="og:description" content="Manage your ShowPay Wallet, view balance, make USDT deposits, and securely withdraw funds." />
+    <meta property="og:url" content="https://app-showpay.in/user-app/pages/home.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ShowPay" />
+    <meta property="og:image" content="https://app-showpay.in/assets/showpay-og-image.jpg" />
+
+    <!-- Twitter Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="ShowPay Dashboard - USDT Wallet" />
+    <meta name="twitter:description" content="Track your ShowPay Deposit and Withdrawals securely." />
+    <meta name="twitter:image" content="https://app-showpay.in/assets/showpay-og-image.jpg" />
+
+    <!-- Performance Optimizations -->
+    <link rel="preload" href="../css/common.css" as="style" />
+    <link rel="preload" href="../css/home.css" as="style" />
+    <link rel="preload" href="../css/popup.css" as="style" />
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/home.css" />
+    <link rel="stylesheet" href="../css/popup.css" />
+    
+    <script src="https://unpkg.com/lucide@0.511.0/dist/umd/lucide.min.js"></script>
+    
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "ShowPay Dashboard",
+      "url": "https://app-showpay.in/user-app/pages/home.html",
+      "description": "Manage your ShowPay Wallet, deposits, and crypto transactions securely.",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "ShowPay",
+        "url": "https://app-showpay.in/"
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- Header -->
+      <header class="top-header">
+        <div class="logo-text">ShowPay</div>
+        <div class="chat-icon">
+          <i
+            data-lucide="message-circle-warning"
+            style="width: 20px; height: 20px"
+          ></i>
+        </div>
+      </header>
+
+      <!-- Slider -->
+      <div class="slider-container" id="sliderContainer">
+        <!-- Slides dynamically injected -->
+        <div class="slider-dots" id="sliderDots"></div>
+      </div>
+
+      <div class="content-area">
+        <!-- Ratios -->
+        <div class="ratios-card">
+          <div class="ratio-left">
+            <div class="ratio-label">USDT Ratio</div>
+            <div class="ratio-value">1 USDT ≈ 107.61 INR</div>
+            <div class="ratio-sub">Bonus ratio: 2%</div>
+          </div>
+          <div class="ratio-right">
+            <div class="ratio-label">INR Bonus Ratio</div>
+            <div class="ratio-percent">4%</div>
+          </div>
+        </div>
+
+        <!-- Top up Button -->
+        <div class="top-up-btn-container">
+          <div class="first-badge">🪙 First</div>
+          <button class="top-up-btn">Top up</button>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-info">
+              <span class="stat-label">Balance</span>
+              <span class="stat-value">0.00</span>
+            </div>
+            <i data-lucide="chevron-right" class="chevron"></i>
+          </div>
+          <div class="stat-item">
+            <div class="stat-info">
+              <span class="stat-label">Today Received</span>
+              <span class="stat-value">0.00</span>
+            </div>
+            <i data-lucide="chevron-right" class="chevron"></i>
+          </div>
+          <div class="stat-item">
+            <div class="stat-info">
+              <span class="stat-label">Top up Bonus</span>
+              <span class="stat-value">0.00</span>
+            </div>
+            <i data-lucide="chevron-right" class="chevron"></i>
+          </div>
+          <div class="stat-item">
+            <div class="stat-info">
+              <span class="stat-label">Team Commission</span>
+              <span class="stat-value">0.00</span>
+            </div>
+            <i data-lucide="chevron-right" class="chevron"></i>
+          </div>
+        </div>
+
+        <!-- Tutorial -->
+        <div class="tutorial-section">
+          <div class="tutorial-title">Tutorial</div>
+          <div class="tutorial-link">ShowPay Official Website</div>
+        </div>
+      </div>
+
+      <!-- Floating Button -->
+      <div class="floating-support">
+        <div class="message-icon"></div>
+      </div>
+
+      <!-- Bottom Nav -->
+      <nav class="bottom-nav">
+        <a href="#" class="nav-item active">
+          <i data-lucide="home"></i>
+          <span>Home</span>
+        </a>
+        <a href="#" class="nav-item">
+          <i data-lucide="arrow-left-right"></i>
+          <span>Deposit</span>
+        </a>
+        <a href="#" class="nav-item">
+          <i data-lucide="briefcase"></i>
+          <span>UPI</span>
+        </a>
+        <a href="#" class="nav-item">
+          <i data-lucide="users"></i>
+          <span>Team</span>
+        </a>
+        <a href="#" class="nav-item">
+          <i data-lucide="user"></i>
+          <span>Me</span>
+        </a>
+      </nav>
+    </div>
+
+    <!-- Overlays -->
+    <div id="overlay" class="popup-overlay">
+      <!-- MPIN Popup -->
+      <div id="mpinPopup" class="mpin-popup hidden">
+        <div class="mpin-title">Enter your mpin</div>
+        <div class="mpin-inputs" id="mpinInputs">
+          <input type="tel" class="mpin-box" maxlength="1" autocomplete="off" />
+          <input type="tel" class="mpin-box" maxlength="1" autocomplete="off" />
+          <input type="tel" class="mpin-box" maxlength="1" autocomplete="off" />
+          <input type="tel" class="mpin-box" maxlength="1" autocomplete="off" />
+          <input type="tel" class="mpin-box" maxlength="1" autocomplete="off" />
+          <input type="tel" class="mpin-box" maxlength="1" autocomplete="off" />
+        </div>
+        <!-- Cancel / Close button for MPIN popup -->
+        <div class="mpin-actions">
+          <button class="mpin-btn btn-cancel" id="mpinCancelBtn">Cancel</button>
+        </div>
+      </div>
+
+      <!-- Success Popup -->
+      <div id="successPopup" class="success-popup hidden">
+        <div class="success-icon">
+          <i data-lucide="check" style="width: 24px; height: 24px"></i>
+        </div>
+        <div class="success-text">
+          Your account updated successfully.<br />
+          Please wait some time.
+        </div>
+      </div>
+
+      <!-- Video Popup -->
+      <div id="videoPopup" class="video-popup hidden">
+        <button class="video-close" id="videoCloseBtn">
+          <i data-lucide="x" style="width: 16px; height: 16px"></i>
+        </button>
+        <video id="popupVideo" class="video-player" loop autoplay muted playsinline></video>
+      </div>
+
+      <!-- Telegram Popup -->
+      <div id="telegramPopup" class="telegram-popup hidden">
+        <button class="telegram-close" id="telegramCloseBtn">
+          <i data-lucide="x"></i>
+        </button>
+        <div class="telegram-icon">
+          <i
+            data-lucide="send"
+            style="width: 30px; height: 30px; margin-left: -2px"
+          ></i>
+        </div>
+        <div class="telegram-title">Join our Telegram</div>
+        <div class="telegram-desc">
+          Get latest updates, offers and priority support on our official
+          channel.
+        </div>
+        <a href="#" id="telegramJoinBtn" target="_blank" class="btn-telegram"
+          >Join Telegram Channel</a
+        >
+      </div>
+    </div>
+
+    <script type="module" src="../js/config/supabase.js"></script>
+    <script type="module" src="../js/home.js"></script>
+    <script>
+      lucide.createIcons();
+    </script>
+  </body>
+</html>

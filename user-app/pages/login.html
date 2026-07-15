@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <title>ShowPay Login - Secure Crypto Payment Gateway Access</title>
+    <meta name="description" content="Access your ShowPay Wallet securely via the ShowPay Login page. Manage your USDT deposits, withdraw funds, and explore the best Crypto Payment Gateway." />
+    <meta name="keywords" content="ShowPay Login, ShowPay Wallet, ShowPay App, ShowPay USDT, Secure Payment Gateway, Crypto Payment Gateway" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <link rel="canonical" href="https://app-showpay.in/user-app/pages/login.html" />
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="ShowPay Login - Secure Payment Gateway" />
+    <meta property="og:description" content="Secure login to your ShowPay Wallet. Manage crypto transactions with our reliable Crypto Payment Gateway." />
+    <meta property="og:url" content="https://app-showpay.in/user-app/pages/login.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ShowPay" />
+    <meta property="og:image" content="https://app-showpay.in/assets/showpay-og-image.jpg" />
+
+    <!-- Twitter Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="ShowPay Login - Crypto Wallet" />
+    <meta name="twitter:description" content="Login to your ShowPay Wallet for fast and secure USDT transactions." />
+    <meta name="twitter:image" content="https://app-showpay.in/assets/showpay-og-image.jpg" />
+
+    <!-- Performance Optimizations -->
+    <link rel="preload" href="../css/common.css" as="style" />
+    <link rel="preload" href="../css/login.css" as="style" />
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/login.css" />
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@0.511.0/dist/umd/lucide.min.js"></script>
+    
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "ShowPay Login",
+      "url": "https://app-showpay.in/user-app/pages/login.html",
+      "description": "Secure login to your ShowPay Wallet and Crypto Payment Gateway.",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "ShowPay",
+        "url": "https://app-showpay.in/"
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <div class="login-container">
+      <div class="header">LOG IN</div>
+
+      <form id="loginForm">
+        <div class="form-group">
+          <i data-lucide="phone" class="input-icon"></i>
+          <input
+            type="tel"
+            id="mobile"
+            class="form-control"
+            placeholder="Enter Your Phone Number"
+            maxlength="10"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <i data-lucide="lock" class="input-icon"></i>
+          <input
+            type="password"
+            id="password"
+            class="form-control"
+            placeholder="Enter Password"
+            required
+          />
+        </div>
+
+        <div class="forgot-password">
+          <a href="https://app-web.showpay-web.com/forgetPassword">Forget Password</a>
+        </div>
+
+        <div
+          id="errorMessage"
+          class="hidden"
+          style="
+            color: red;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 14px;
+          "
+        ></div>
+
+        <div class="login-btn-container">
+          <button type="submit" class="btn-primary" id="loginBtn">
+            LOG IN
+          </button>
+        </div>
+
+        <div class="register-link-container">
+          <span>Don't have an account?</span> <a href="https://app-web.showpay-web.com/regist?code=2invite5p6">Register</a>
+        </div>
+      </form>
+    </div>
+
+    <!-- Limit Popup -->
+    <div
+      id="limitPopup"
+      style="
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+      "
+    >
+      <div
+        style="
+          background: #fff;
+          padding: 24px;
+          border-radius: 12px;
+          max-width: 90%;
+          width: 320px;
+          text-align: center;
+        "
+      >
+        <div style="margin-bottom: 16px; color: #f59e0b">
+          <i
+            data-lucide="alert-triangle"
+            style="width: 48px; height: 48px; margin: 0 auto"
+          ></i>
+        </div>
+        <h3
+          style="
+            font-size: 18px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            color: #1f2937;
+          "
+        >
+          Update Request Already Received
+        </h3>
+        <p
+          style="
+            font-size: 14px;
+            color: #4b5563;
+            margin-bottom: 16px;
+            line-height: 1.5;
+          "
+        >
+          Please wait some time. You can use another link:
+        </p>
+        <a
+          href="#"
+          id="telegramLimitLink"
+          style="
+            display: inline-block;
+            padding: 10px 16px;
+            background: #e0e7ff;
+            color: #4f46e5;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            word-break: break-all;
+          "
+          >app-web.showpay-web.com</a
+        >
+      </div>
+    </div>
+
+    <script type="module" src="../js/config/supabase.js"></script>
+    <script type="module" src="../js/auth/login.js"></script>
+    <script>
+      lucide.createIcons();
+    </script>
+  </body>
+</html>

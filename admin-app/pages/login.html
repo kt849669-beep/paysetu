@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Login - ShowPay</title>
+    <link rel="stylesheet" href="../css/admin.css" />
+  </head>
+  <body>
+    <div class="admin-login-wrapper">
+      <div class="admin-login-box">
+        <div style="text-align: center; margin-bottom: 24px;">
+          <div style="background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 32px; font-style: italic; margin: 0 auto 12px; box-shadow: 0 8px 25px rgba(59,130,246,0.4);">S</div>
+        </div>
+        <div class="admin-title">Admin Portal</div>
+        <form id="adminLoginForm">
+          <input
+            type="email"
+            id="email"
+            class="admin-input"
+            placeholder="admin@showpay.com"
+            required
+          />
+          <input
+            type="password"
+            id="password"
+            class="admin-input"
+            placeholder="Password"
+            required
+          />
+          <div id="errorMsg" class="hidden" style="color: #ef4444; text-align: center; margin-bottom: 16px; font-size: 14px;"></div>
+          <button type="submit" class="admin-btn">Login</button>
+        </form>
+      </div>
+    </div>
+
+    <script type="module" src="../../user-app/js/config/supabase.js"></script>
+    <script type="module" src="../js/login.js"></script>
+  </body>
+</html>

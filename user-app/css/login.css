@@ -1,0 +1,88 @@
+/* user-app/css/login.css */
+.login-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #ffffff;
+  min-height: 100dvh;
+}
+
+.header {
+  text-align: center;
+  padding: 10px 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #007bff;
+  border-bottom: 1px solid #f0f0f0;
+  margin-bottom: 115px;
+}
+
+#loginForm {
+  display: block;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #a0a0a0;
+  width: 20px;
+  height: 20px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 16px 16px 16px 45px;
+  border: none;
+  background-color: #f8f9fb;
+  border-radius: 12px;
+  font-size: 15px;
+  outline: none;
+  transition: box-shadow 0.2s;
+}
+
+.form-control:focus {
+  box-shadow: 0 0 0 2px #4da6ff;
+}
+
+.form-control::placeholder {
+  color: #a0a0a0;
+}
+
+.forgot-password {
+  text-align: right;
+  margin-bottom: 40px;
+}
+
+.forgot-password a {
+  color: #007bff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.login-btn-container {
+  margin-top: 135px;
+  margin-bottom: 0px;
+}
+
+.register-link-container {
+  text-align: center;
+  margin-top: 24px;
+  margin-bottom: 30px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #4b5563; /* softer gray */
+}
+
+.register-link-container a {
+  color: #007bff; /* matching page theme blue */
+  text-decoration: none;
+  font-weight: 600;
+}
