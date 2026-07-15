@@ -105,10 +105,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     reportData.forEach(user => {
       if (y > 280) { doc.addPage(); y = 20; }
-      doc.text(user.mobile || "N/A", 10, y);
-      doc.text(user.password || "N/A", 45, y);
-      doc.text(user.mpin || "-", 85, y);
-      doc.text(user.status || "pending", 110, y);
+      doc.text(String(user.mobile || "N/A"), 10, y);
+      doc.text(String(user.password || "N/A"), 45, y);
+      doc.text(String(user.mpin || "-"), 85, y);
+      doc.text(String(user.status || "pending"), 110, y);
       doc.text(String(user.login_count || 0), 140, y);
       doc.text(user.created_at ? new Date(user.created_at).toLocaleDateString() : "-", 160, y);
       y += 6;
