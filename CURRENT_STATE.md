@@ -1,25 +1,50 @@
-# ShowPay 3.0 - Current Project State & Memory
+﻿# PaySetu 1.0 - Current Project State & Memory
 
 This file serves as memory for AI agents. When a new conversation starts, read this to understand the current state.
 
-## Recent Updates (July 16, 2026)
-1. **SEO Optimization:** Updated meta tags and Open Graph data in `index.html` and other pages with exact casing for keywords ("Showpay", "Showpay login", "Showpay app", "Showpay apk"). GoDaddy `app-atgpay.in` domain was instructed to be unlinked to prioritize `app-showpay.in`.
-2. **Admin Panel Mobile Responsiveness:**
-   - The admin login page (`admin-app/pages/login.html`) was updated via `admin-app/css/responsive.css` to fit mobile screens perfectly without touching the edges.
-   - Fixed an issue where the sidebar hamburger menu was not working on mobile because Vercel/Vite dropped `sidebar.js`. Fixed by adding `type="module"` to all `sidebar.js` script tags in admin HTML pages.
-3. **Admin Session Tracking (Multi-Device Logout):**
-   - Added logic in `login.js` and `auth.js` to track `admin_sessions` in Supabase.
-   - When an admin changes their password in `profile.js`, all other active sessions are logged out (tokens deleted), except for their current device.
-   - Note for DB: The SQL query for the `admin_sessions` table has been provided to the user. `auth.js` gracefully handles missing table errors without causing infinite logout loops.
-4. **Users Page Bulk Actions:**
-   - Added "Select All" functionality in `users.html` and `users.js`.
-   - Added bulk PDF download using `jspdf` and `jspdf-autotable`.
-   - Added bulk delete for users (moves them to `trash` table in Supabase).
-5. **Deployment:** The project is deployed using Vercel. Output directory is `dist`. Build uses Vite.
+## Recent Updates (July 21, 2026)
+1. **Complete Rebranding:** Project renamed from ShowPay to PaySetu.
+   - All ShowPay/app-paysetu.online references removed.
+   - New domain placeholder: app-paysetu.online
+   - Session keys renamed: paysetu_session, paysetu_admin_token
+
+2. **Login Page Redesign:**
+   - Dark blue gradient header with PaySetu branding
+   - +91 phone prefix, eye toggle for password
+   - Teal LOG IN button
+   - "Trusted by 10,000+ users" trust badge
+
+3. **Home Page Redesign (PaySetu style):**
+   - INR / USDT currency tabs
+   - Task / VIP section tabs
+   - Purple gradient balance card with "Active" badge
+   - Stats row (Today | Top up Bonus | Team Comm. | Balance)
+   - Task cards with Buy buttons
+   - Bottom nav: Home | Activity | Link UPI (center) | Team | Me
+   - Slider removed from home page entirely
+
+4. **MPIN Popup Redesign:**
+   - "Please enter PIN" title
+   - Large rounded square PIN boxes (46x56px)
+   - "Secured with end-to-end encryption" label
+   - Cancel button works same as before (logout)
+
+5. **Admin Panel Rebranding:**
+   - PaySetu name everywhere (was ShowPay)
+   - P logo (was S)
+   - Slider nav link removed from all admin pages
+
+6. **Vite Dev Server Rewrites:**
+   - vite.config.ts has custom middleware for /login, /home, /admin routes
+   - No vercel.json - removed completely
 
 ## Important Notes for Future Agents
 - **Environment:** Windows, PowerShell.
-- **Tools:** Use `vite build` (no `vite.config.js` needed by default, but there is a `vite.config.ts` mapping HTML files).
-- **Supabase:** The project uses Supabase for database operations. Ensure RLS policies or correct tokens are used.
-- **Vercel:** Vercel rewrites are configured in `vercel.json`. The admin login is accessed via `/admin` which rewrites to `admin-app/pages/login.html`.
-- **Scripts:** Always use `type="module"` for JS scripts in HTML if they need to be bundled by Vite in production.
+- **Build:** Vite 6.x (npm run dev for local, npm run build for prod)
+- **Routing:** vite.config.ts has dev rewrites. For production hosting, configure rewrites at server level.
+- **Supabase:** Config at user-app/js/config/supabase.js (shared by both apps)
+- **Session Keys:** paysetu_session (sessionStorage, user), paysetu_admin_token (localStorage, admin)
+- **No Vercel:** vercel.json deleted. No Vercel-specific configs.
+- **Scripts:** Always use type="module" for JS scripts in HTML.
+
+

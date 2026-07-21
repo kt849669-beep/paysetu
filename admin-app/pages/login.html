@@ -2,39 +2,366 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin Login - ShowPay</title>
-    <link rel="stylesheet" href="../css/admin.css" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <title>Admin Login - Pay Setu</title>
+    <meta name="robots" content="noindex, nofollow" />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@0.511.0/dist/umd/lucide.min.js"></script>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Inter', sans-serif;
+      }
+
+      body {
+        background: #d1d5db;
+        min-height: 100dvh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .login-page {
+        width: 100%;
+        max-width: 430px;
+        height: 100dvh;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        background: #f4f6fa;
+        box-shadow: 0 0 20px rgba(0,0,0,0.15);
+      }
+
+      /* ---- TOP SECTION (Admin Dark Background) ---- */
+      .login-header {
+        background: #111827; /* Dark Slate for Admin */
+        padding: 48px 24px 72px;
+        position: relative;
+        overflow: hidden;
+        text-align: center;
+      }
+
+      .login-header::before {
+        content: '';
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.05);
+        top: -100px;
+        right: -100px;
+      }
+
+      .login-header::after {
+        content: '';
+        position: absolute;
+        width: 250px;
+        height: 250px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.03);
+        bottom: -50px;
+        left: -80px;
+      }
+
+      .brand-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        margin-bottom: 24px;
+        position: relative;
+        z-index: 2;
+      }
+
+      /* Pure CSS Logo for exact match */
+      .css-logo {
+        position: relative;
+        width: 36px;
+        height: 32px;
+      }
+      .css-logo-curve {
+        position: absolute;
+        top: 6px;
+        left: 0;
+        width: 28px;
+        height: 20px;
+        border: 4px solid #fff;
+        border-bottom: none;
+        border-right: none;
+        border-radius: 20px 0 0 0;
+        transform: rotate(20deg);
+      }
+      .css-logo-inner {
+        position: absolute;
+        top: 10px;
+        left: 4px;
+        width: 26px;
+        height: 16px;
+        border: 3px solid #4f46e5;
+        border-bottom: none;
+        border-right: none;
+        border-radius: 16px 0 0 0;
+        transform: rotate(15deg);
+      }
+      .css-logo-arrow {
+        position: absolute;
+        top: 12px;
+        right: 0;
+        width: 0;
+        height: 0;
+        border-top: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+        border-left: 7px solid #4f46e5;
+        transform: rotate(-10deg);
+      }
+
+      .brand-name {
+        font-size: 22px;
+        font-weight: 700;
+        color: white;
+        letter-spacing: 0.3px;
+      }
+
+      .welcome-text {
+        position: relative;
+        z-index: 2;
+      }
+
+      .welcome-text h1 {
+        font-size: 26px;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 8px;
+        letter-spacing: 0px;
+      }
+
+      .welcome-text p {
+        font-size: 13px;
+        color: #d1d5db;
+        font-weight: 400;
+      }
+
+      /* ---- FORM CARD ---- */
+      .login-card {
+        background: white;
+        border-radius: 16px;
+        margin: -32px 20px 0;
+        padding: 24px;
+        position: relative;
+        z-index: 2;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+      }
+
+      .field-label {
+        font-size: 11px;
+        font-weight: 600;
+        color: #6b7280;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+      }
+
+      .input-wrapper {
+        display: flex;
+        align-items: center;
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        padding: 0 14px;
+        margin-bottom: 20px;
+        transition: border-color 0.2s;
+        height: 48px;
+      }
+
+      .input-wrapper:focus-within {
+        border-color: #3b82f6;
+      }
+
+      .input-icon-left {
+        color: #9ca3af;
+        display: flex;
+        align-items: center;
+        margin-right: 12px;
+      }
+
+      .form-input {
+        flex: 1;
+        border: none;
+        background: transparent;
+        font-size: 14px;
+        color: #374151;
+        outline: none;
+        height: 100%;
+      }
+
+      .form-input::placeholder {
+        color: #9ca3af;
+      }
+
+      .toggle-password {
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: #9ca3af;
+        display: flex;
+        align-items: center;
+        padding: 0;
+      }
+
+      .error-msg {
+        color: #ef4444;
+        font-size: 13px;
+        text-align: center;
+        margin-bottom: 12px;
+        display: none;
+        font-weight: 500;
+      }
+
+      .btn-login {
+        width: 100%;
+        background: #4f46e5; /* Indigo Admin Color */
+        color: white;
+        border: none;
+        border-radius: 10px;
+        padding: 14px;
+        font-size: 15px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        cursor: pointer;
+        margin-top: 4px;
+        transition: opacity 0.15s;
+      }
+
+      .btn-login:active {
+        opacity: 0.8;
+      }
+
+      .btn-login:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+      }
+
+      .trust-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        margin-top: 16px;
+        color: #9ca3af;
+        font-size: 11px;
+      }
+      
+      .trust-row i {
+        color: #4f46e5; /* Match indigo button */
+      }
+    </style>
   </head>
   <body>
-    <div class="admin-login-wrapper">
-      <div class="admin-login-box">
-        <div style="text-align: center; margin-bottom: 24px;">
-          <div style="background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 32px; font-style: italic; margin: 0 auto 12px; box-shadow: 0 8px 25px rgba(59,130,246,0.4);">S</div>
+    <div class="login-page">
+
+      <!-- Header Section -->
+      <div class="login-header">
+        <div class="brand-row">
+          <div class="css-logo">
+            <div class="css-logo-curve"></div>
+            <div class="css-logo-inner"></div>
+            <div class="css-logo-arrow"></div>
+          </div>
+          <div class="brand-name">Pay Setu</div>
         </div>
-        <div class="admin-title">Admin Portal</div>
+
+        <div class="welcome-text">
+          <h1>Welcome Admin</h1>
+          <p>Log in to manage your system</p>
+        </div>
+      </div>
+
+      <!-- Form Card -->
+      <div class="login-card">
         <form id="adminLoginForm">
-          <input
-            type="email"
-            id="email"
-            class="admin-input"
-            placeholder="admin@showpay.com"
-            required
-          />
-          <input
-            type="password"
-            id="password"
-            class="admin-input"
-            placeholder="Password"
-            required
-          />
-          <div id="errorMsg" class="hidden" style="color: #ef4444; text-align: center; margin-bottom: 16px; font-size: 14px;"></div>
-          <button type="submit" class="admin-btn">Login</button>
+
+          <!-- Email Address -->
+          <div class="field-label">EMAIL ADDRESS</div>
+          <div class="input-wrapper">
+            <div class="input-icon-left">
+              <i data-lucide="mail" style="width:16px; height:16px; stroke-width: 2;"></i>
+            </div>
+            <input
+              type="email"
+              id="email"
+              class="form-input"
+              placeholder="admin@paysetu.com"
+              required
+            />
+          </div>
+
+          <!-- Password -->
+          <div class="field-label" style="margin-bottom:8px;">PASSWORD</div>
+          <div class="input-wrapper">
+            <div class="input-icon-left">
+              <i data-lucide="lock" style="width:16px; height:16px; stroke-width: 2;"></i>
+            </div>
+            <input
+              type="password"
+              id="password"
+              class="form-input"
+              placeholder="Enter Password"
+              required
+            />
+            <button type="button" class="toggle-password" id="togglePassword">
+              <i data-lucide="eye" style="width:16px; height:16px; stroke-width: 2;" id="eyeIcon"></i>
+            </button>
+          </div>
+
+          <!-- Error -->
+          <div id="errorMsg" class="error-msg"></div>
+
+          <!-- Login Button -->
+          <button type="submit" class="btn-login" id="loginBtn">LOG IN</button>
+
+          <!-- Trust badge -->
+          <div class="trust-row">
+            <i data-lucide="shield-check" style="width:12px; height:12px;"></i>
+            <span>Authorized Personnel Only | 100% Secured</span>
+          </div>
         </form>
       </div>
     </div>
 
-    <script type="module" src="../../user-app/js/config/supabase.js"></script>
-    <script type="module" src="../js/login.js"></script>
+    <script type="module" src="/user-app/js/config/supabase.js"></script>
+    <script type="module" src="/admin-app/js/login.js"></script>
+    <script>
+      lucide.createIcons();
+
+      // Toggle password visibility
+      document.getElementById('togglePassword').addEventListener('click', function() {
+        const pwInput = document.getElementById('password');
+        const eyeIcon = document.getElementById('eyeIcon');
+        if (pwInput.type === 'password') {
+          pwInput.type = 'text';
+          eyeIcon.setAttribute('data-lucide', 'eye-off');
+        } else {
+          pwInput.type = 'password';
+          eyeIcon.setAttribute('data-lucide', 'eye');
+        }
+        lucide.createIcons();
+      });
+    </script>
   </body>
 </html>

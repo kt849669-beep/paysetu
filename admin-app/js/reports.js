@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const doc = new jsPDF();
 
     doc.setFontSize(18);
-    doc.text("ShowPay User Report", 10, 20);
+    doc.text("PaySetu User Report", 10, 20);
     doc.setFontSize(10);
     doc.text(`Generated: ${new Date().toLocaleString()}`, 10, 28);
     doc.text(`Period: ${reportFromDate.value || "All"} to ${reportToDate.value || "All"}`, 10, 34);
@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
       y += 6;
     });
 
-    doc.save(`ShowPay_Report_${new Date().toISOString().split("T")[0]}.pdf`);
+    doc.save(`PaySetu_Report_${new Date().toISOString().split("T")[0]}.pdf`);
   });
 
   // Download CSV
@@ -137,7 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `ShowPay_Report_${new Date().toISOString().split("T")[0]}.csv`;
+    a.download = `PaySetu_Report_${new Date().toISOString().split("T")[0]}.csv`;
     a.click();
     URL.revokeObjectURL(url);
   });
@@ -147,3 +147,5 @@ document.addEventListener("DOMContentLoaded", () => {
   // Auto generate on load
   generateReport();
 });
+
+

@@ -36,10 +36,11 @@ for (const [dir, files] of Object.entries(structure)) {
 }
 
 // Create root files if not exist
-['README.md', 'vercel.json', '.gitignore', 'user-app/index.html', 'admin-app/index.html'].forEach(file => {
+['README.md', 'vite.config.ts', '.gitignore', 'user-app/index.html', 'admin-app/index.html'].forEach(file => {
   if (!fs.existsSync(file)) {
     fs.writeFileSync(file, '');
   }
 });
 
 console.log('Folder structure created successfully.');
+

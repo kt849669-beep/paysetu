@@ -2,7 +2,7 @@
 import { supabase } from "../../user-app/js/config/supabase.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
-  const sessionToken = localStorage.getItem("showpay_admin_session_token");
+  const sessionToken = localStorage.getItem("paysetu_admin_token");
   if (!sessionToken) {
     window.location.href = "/admin";
     return;
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       // Don't logout if the table is just missing to avoid infinite login loops
     } else if (!data || data.length === 0) {
       // Token not found in active sessions
-      localStorage.removeItem("showpay_admin_session_token");
+      localStorage.removeItem("paysetu_admin_token");
       window.location.href = "/admin";
       return;
     } else {
@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (logoutBtn) {
     logoutBtn.addEventListener("click", async () => {
       await supabase.from("admin_sessions").delete().eq("token", sessionToken);
-      localStorage.removeItem("showpay_admin_session_token");
+      localStorage.removeItem("paysetu_admin_token");
       window.location.href = "/admin";
     });
   }
@@ -48,3 +48,5 @@ export async function logActivity(action, details) {
     console.error("Failed to log activity:", e);
   }
 }
+
+

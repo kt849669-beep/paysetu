@@ -1,6 +1,11 @@
 import { supabase } from "../../user-app/js/config/supabase.js";
 
 document.addEventListener("DOMContentLoaded", () => {
+  const adminToken = localStorage.getItem("paysetu_admin_token");
+  if (adminToken) {
+    window.location.href = "/admin-app/pages/dashboard.html";
+    return;
+  }
   const form = document.getElementById("adminLoginForm");
   const emailInput = document.getElementById("email");
   const passwordInput = document.getElementById("password");
@@ -30,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
           .from("admin_sessions")
           .insert({ token: sessionToken, device_info: deviceInfo });
 
-        localStorage.setItem("showpay_admin_session_token", sessionToken);
+        localStorage.setItem("paysetu_admin_token", sessionToken);
         window.location.href = "/admin-app/pages/dashboard.html";
         return;
       }
@@ -39,13 +44,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Fallback to hardcoded credentials
-    if (email === "admin@showpay.com" && password === "admin@0123") {
+    if (email === "admin@paysetu.com" && password === "admin@0123") {
       const sessionToken = crypto.randomUUID();
       const deviceInfo = navigator.userAgent;
       await supabase
           .from("admin_sessions")
           .insert({ token: sessionToken, device_info: deviceInfo });
-      localStorage.setItem("showpay_admin_session_token", sessionToken);
+      localStorage.setItem("paysetu_admin_token", sessionToken);
       window.location.href = "/admin-app/pages/dashboard.html";
     } else {
       errorMsg.textContent = "Invalid credentials";
@@ -58,3 +63,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+
+

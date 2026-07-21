@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const { data, error } = await supabase.from("admin_sessions").select("*").order("last_active", { ascending: false });
       if (error) throw error;
       
-      const currentToken = localStorage.getItem("showpay_admin_session_token");
+      const currentToken = localStorage.getItem("paysetu_admin_token");
       sessionsTableBody.innerHTML = "";
       
       if (!data || data.length === 0) {
@@ -66,11 +66,11 @@ document.addEventListener("DOMContentLoaded", () => {
         adminData = data[0];
         profileName.value = adminData.admin_name || "";
         profileEmail.value = adminData.admin_email || "";
-        profileDisplayName.textContent = adminData.admin_name || "ShowPay Admin";
+        profileDisplayName.textContent = adminData.admin_name || "PaySetu Admin";
       } else {
         // No admin settings found, use defaults
-        profileName.value = "ShowPay Admin";
-        profileEmail.value = "admin@showpay.com";
+        profileName.value = "PaySetu Admin";
+        profileEmail.value = "admin@paysetu.com";
       }
     } catch (e) {
       console.error("Error fetching profile:", e);
@@ -143,7 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Update localStorage with new token if password was changed
       if (newSessionToken) {
-        localStorage.setItem("showpay_admin_session_token", newSessionToken);
+        localStorage.setItem("paysetu_admin_token", newSessionToken);
       }
       profileDisplayName.textContent = profileName.value;
       profileCurrentPassword.value = "";
@@ -167,3 +167,6 @@ document.addEventListener("DOMContentLoaded", () => {
   fetchProfile();
   fetchSessions();
 });
+
+
+

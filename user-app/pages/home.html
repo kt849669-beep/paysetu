@@ -2,228 +2,867 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
-    <title>Showpay Dashboard | Manage your Showpay Usdt</title>
-    <meta name="description" content="Access your dashboard via the Showpay app. Get Showpay help and contact Showpay customer support for your Showpay payment gateway needs.">
-    <meta name="keywords" content="ShowPay Wallet, ShowPay App, ShowPay Deposit, ShowPay Withdraw, ShowPay USDT, ShowPay App Download, Secure Payment Gateway, Crypto Payment Gateway" />
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-    <link rel="canonical" href="https://app-showpay.in/user-app/pages/home.html" />
-    
-    <!-- Open Graph Tags -->
-    <meta property="og:title" content="ShowPay Wallet Dashboard - Crypto Payment Gateway" />
-    <meta property="og:description" content="Manage your ShowPay Wallet, view balance, make USDT deposits, and securely withdraw funds." />
-    <meta property="og:url" content="https://app-showpay.in/user-app/pages/home.html" />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="ShowPay" />
-    <meta property="og:image" content="https://app-showpay.in/assets/showpay-og-image.jpg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>PaySetu Dashboard | Manage your Wallet</title>
+    <meta name="description" content="Access your PaySetu dashboard. Manage your earnings, tasks and wallet." />
+    <meta name="keywords" content="PaySetu Wallet, PaySetu App, PaySetu Tasks, PaySetu Deposit" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://app-paysetu.online/user-app/pages/home.html" />
 
-    <!-- Twitter Tags -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="ShowPay Dashboard - USDT Wallet" />
-    <meta name="twitter:description" content="Track your ShowPay Deposit and Withdrawals securely." />
-    <meta name="twitter:image" content="https://app-showpay.in/assets/showpay-og-image.jpg" />
-
-    <!-- Performance Optimizations -->
-    <link rel="preload" href="../css/common.css" as="style" />
-    <link rel="preload" href="../css/home.css" as="style" />
-    <link rel="preload" href="../css/popup.css" as="style" />
-    <link rel="stylesheet" href="../css/common.css" />
-    <link rel="stylesheet" href="../css/home.css" />
-    <link rel="stylesheet" href="../css/popup.css" />
-    
-    <script src="https://unpkg.com/lucide@0.511.0/dist/umd/lucide.min.js"></script>
-    
-    <!-- Schema.org JSON-LD -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      "name": "ShowPay Dashboard",
-      "url": "https://app-showpay.in/user-app/pages/home.html",
-      "description": "Manage your ShowPay Wallet, deposits, and crypto transactions securely.",
-      "isPartOf": {
-        "@type": "WebSite",
-        "name": "ShowPay",
-        "url": "https://app-showpay.in/"
+    <!-- Fast Authentication Check -->
+    <script>
+      if (!sessionStorage.getItem("paysetu_session")) {
+        window.location.replace("/login");
       }
-    }
     </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/user-app/css/popup.css" />
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@0.511.0/dist/umd/lucide.min.js"></script>
+
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+
+      body {
+        background: #d1d5db; /* Gray desktop background */
+        min-height: 100dvh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .app-container {
+        width: 100%;
+        max-width: 430px;
+        height: 100dvh;
+        overflow-y: auto;
+        margin: 0;
+        background: #f8f9fc;
+        padding-bottom: 90px;
+        position: relative;
+        box-shadow: 0 0 20px rgba(0,0,0,0.15);
+      }
+
+      .top-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 16px;
+        background: white;
+      }
+
+      .brand-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      /* Pure CSS Logo for exact match */
+      .css-logo {
+        position: relative;
+        width: 30px;
+        height: 24px;
+      }
+      .css-logo-curve {
+        position: absolute;
+        top: 4px;
+        left: 0;
+        width: 20px;
+        height: 14px;
+        border: 3px solid #1a2332;
+        border-bottom: none;
+        border-right: none;
+        border-radius: 20px 0 0 0;
+        transform: rotate(20deg);
+      }
+      .css-logo-inner {
+        position: absolute;
+        top: 7px;
+        left: 3px;
+        width: 20px;
+        height: 12px;
+        border: 2px solid #37c790;
+        border-bottom: none;
+        border-right: none;
+        border-radius: 16px 0 0 0;
+        transform: rotate(15deg);
+      }
+      .css-logo-arrow {
+        position: absolute;
+        top: 9px;
+        right: 0;
+        width: 0;
+        height: 0;
+        border-top: 4px solid transparent;
+        border-bottom: 4px solid transparent;
+        border-left: 5px solid #37c790;
+        transform: rotate(-10deg);
+      }
+
+      .brand-name-text {
+        font-size: 18px;
+        font-weight: 700;
+        color: #1a2332;
+        letter-spacing: -0.5px;
+      }
+
+      .profile-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: #f3f4f6;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #6b7280;
+        cursor: pointer;
+      }
+
+      /* ======= CURRENCY TABS ======= */
+      .currency-tabs {
+        display: flex;
+        margin: 12px 16px 0;
+        background: #f3f4f6;
+        border-radius: 12px;
+        padding: 4px;
+        gap: 4px;
+      }
+
+      .currency-tab {
+        flex: 1;
+        padding: 12px 0;
+        border-radius: 8px;
+        border: none;
+        background: transparent;
+        font-size: 13px;
+        font-weight: 700;
+        color: #9ca3af;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        transition: all 0.2s;
+      }
+
+      .currency-tab.active {
+        background: white;
+        color: #6366f1;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      }
+      
+      .currency-icon {
+        font-size: 16px;
+        font-weight: 500;
+      }
+
+      /* ======= SECTION TABS (Task / VIP) ======= */
+      .section-tabs {
+        display: flex;
+        padding: 14px 16px 0;
+        gap: 28px;
+        background: white;
+      }
+
+      .section-tab {
+        font-size: 14px;
+        font-weight: 700;
+        color: #9ca3af;
+        cursor: pointer;
+        padding-bottom: 12px;
+        position: relative;
+        border: none;
+        background: none;
+      }
+
+      .section-tab.active {
+        color: #7c3aed;
+      }
+
+      .section-tab.active::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: #7c3aed;
+        border-radius: 3px 3px 0 0;
+      }
+
+      /* ======= BALANCE CARD ======= */
+      .balance-card {
+        margin: 14px 16px 0;
+        background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+        border-radius: 20px;
+        padding: 18px 24px;
+        position: relative;
+        overflow: hidden;
+        color: white;
+        box-shadow: 0 10px 25px rgba(109,40,217,0.25);
+      }
+
+      .balance-card::before {
+        content: '';
+        position: absolute;
+        width: 250px;
+        height: 250px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.06);
+        top: -100px;
+        right: -80px;
+      }
+
+      .balance-card::after {
+        content: '';
+        position: absolute;
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.04);
+        bottom: -50px;
+        left: 80px;
+      }
+
+      .balance-label {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        opacity: 0.9;
+        margin-bottom: 8px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .balance-amount {
+        font-size: 32px;
+        font-weight: 800;
+        letter-spacing: -1px;
+        margin-bottom: 8px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .balance-earnings {
+        font-size: 12px;
+        opacity: 0.9;
+        position: relative;
+        z-index: 2;
+      }
+
+      .active-badge {
+        position: absolute;
+        top: 18px;
+        right: 20px;
+        background: rgba(255,255,255,0.2);
+        border: 1px solid rgba(255,255,255,0.3);
+        border-radius: 20px;
+        padding: 4px 10px;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 11px;
+        font-weight: 600;
+        color: white;
+        z-index: 2;
+      }
+
+      .active-dot {
+        width: 8px;
+        height: 8px;
+        background: #34d399;
+        border-radius: 50%;
+      }
+
+      /* ======= STATS ROW ======= */
+      .stats-row {
+        margin: 12px 16px 0;
+        background: white;
+        border-radius: 16px;
+        padding: 12px 16px;
+        display: flex;
+        justify-content: space-between;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      }
+
+      .stat-col {
+        flex: 1;
+        text-align: center;
+      }
+
+      .stat-col:not(:last-child) {
+        border-right: 1px solid #f3f4f6;
+      }
+
+      .stat-val {
+        font-size: 16px;
+        font-weight: 700;
+        color: #1a2332;
+        margin-bottom: 4px;
+      }
+
+      .stat-val.green { color: #10b981; }
+
+      .stat-lbl {
+        font-size: 10px;
+        color: #9ca3af;
+        font-weight: 500;
+      }
+
+      /* ======= INFO BANNER ======= */
+      .info-banner {
+        margin: 12px 16px 0;
+        background: #f5f3ff;
+        border-radius: 12px;
+        padding: 10px 14px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 12px;
+        color: #6d28d9;
+        font-weight: 600;
+      }
+      
+      .info-icon {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        border: 1.5px solid #6d28d9;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      /* ======= FILTER ROW ======= */
+      .filter-row {
+        margin: 14px 16px 0;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .filter-select-btn {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        background: white;
+        border: none;
+        border-radius: 12px;
+        padding: 12px 14px;
+        font-size: 12px;
+        font-weight: 600;
+        color: #4b5563;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      }
+
+      .filter-input {
+        flex: 1;
+        background: white;
+        border: none;
+        border-radius: 12px;
+        padding: 12px 14px;
+        font-size: 12px;
+        color: #4b5563;
+        outline: none;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      }
+
+      .filter-input::placeholder { color: #9ca3af; }
+
+      .filter-refresh-btn {
+        width: 40px;
+        height: 40px;
+        background: #7c3aed;
+        border: none;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: white;
+        flex-shrink: 0;
+        box-shadow: 0 4px 12px rgba(124,58,237,0.3);
+      }
+
+      /* ======= TASKS HEADER ======= */
+      .tasks-header {
+        margin: 16px 16px 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .tasks-title {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        color: #9ca3af;
+      }
+
+      .tasks-count {
+        font-size: 11px;
+        font-weight: 700;
+        color: #7c3aed;
+        background: #f5f3ff;
+        padding: 4px 12px;
+        border-radius: 12px;
+      }
+
+      /* ======= TASK CARD ======= */
+      .task-card {
+        margin: 0 16px 10px;
+        background: white;
+        border-radius: 16px;
+        padding: 16px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .task-card::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        background: #2dd4bf; /* Greenish/teal border */
+      }
+      
+      .task-card:nth-child(2n)::before {
+        background: #38bdf8; /* Blue border for alternative cards */
+      }
+
+      .task-amount-col {
+        flex-shrink: 0;
+        width: 60px;
+      }
+
+      .task-currency {
+        font-size: 11px;
+        color: #9ca3af;
+        font-weight: 600;
+        margin-bottom: -2px;
+      }
+
+      .task-amount {
+        font-size: 24px;
+        font-weight: 800;
+        color: #1a2332;
+        letter-spacing: -1px;
+      }
+
+      .task-unit {
+        font-size: 10px;
+        font-weight: 700;
+        color: #a78bfa;
+      }
+
+      .task-info-col {
+        flex: 1;
+        padding-left: 12px;
+        border-left: 1px solid #f3f4f6;
+      }
+
+      .task-info-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 6px;
+      }
+      
+      .task-info-row:last-child {
+        margin-bottom: 0;
+      }
+
+      .task-info-lbl {
+        font-size: 11px;
+        color: #9ca3af;
+        font-weight: 500;
+        min-width: 46px;
+      }
+
+      .task-info-val {
+        font-size: 12px;
+        font-weight: 700;
+        color: #1a2332;
+      }
+
+      .task-badge {
+        background: #ecfdf5;
+        color: #10b981;
+        font-size: 10px;
+        font-weight: 700;
+        padding: 2px 6px;
+        border-radius: 10px;
+      }
+
+      .task-quota-val {
+        font-size: 12px;
+        font-weight: 700;
+        color: #10b981;
+      }
+
+      .buy-btn {
+        flex-shrink: 0;
+        background: #7c3aed;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        padding: 10px 20px;
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: transform 0.15s, box-shadow 0.15s;
+        box-shadow: 0 4px 12px rgba(124,58,237,0.3);
+      }
+
+      .buy-btn:active { transform: scale(0.96); }
+
+      /* ======= BOTTOM NAV ======= */
+      .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        max-width: 430px;
+        background: white;
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-end;
+        padding: 12px 0 16px;
+        border-top: 1px solid #f3f4f6;
+        z-index: 100;
+      }
+
+      .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        color: #9ca3af;
+        font-size: 10px;
+        font-weight: 600;
+        gap: 4px;
+        min-width: 60px;
+      }
+
+      .nav-item.active { color: #7c3aed; }
+      
+      .nav-item i {
+        stroke-width: 2.5;
+      }
+
+      /* Center UPI button */
+      .nav-item-center {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        color: #7c3aed;
+        font-size: 10px;
+        font-weight: 700;
+        gap: 4px;
+        margin-top: -24px;
+        position: relative;
+      }
+
+      .nav-center-icon {
+        width: 56px;
+        height: 56px;
+        background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        box-shadow: 0 6px 16px rgba(109,40,217,0.4);
+        border: 4px solid #f8f9fc;
+      }
+    </style>
   </head>
   <body>
     <div class="app-container">
-      <!-- Header -->
+
+      <!-- Top Header -->
       <header class="top-header">
-        <div class="logo-text">ShowPay</div>
-        <div class="chat-icon">
-          <i
-            data-lucide="message-circle-warning"
-            style="width: 20px; height: 20px"
-          ></i>
+        <div class="brand-row">
+          <div class="css-logo">
+            <div class="css-logo-curve"></div>
+            <div class="css-logo-inner"></div>
+            <div class="css-logo-arrow"></div>
+          </div>
+          <div class="brand-name-text">PaySetu</div>
+        </div>
+        <div class="profile-btn">
+          <i data-lucide="user" style="width:20px; height:20px; stroke-width: 2.5;"></i>
         </div>
       </header>
 
-      <!-- Slider -->
-      <div class="slider-container" id="sliderContainer">
-        <!-- Slides dynamically injected -->
-        <div class="slider-dots" id="sliderDots"></div>
+      <!-- Currency Toggle Tabs -->
+      <div class="currency-tabs">
+        <button class="currency-tab active" id="tabINR">
+          <span class="currency-icon">₹</span> INR
+        </button>
+        <button class="currency-tab" id="tabUSDT">
+          <span class="currency-icon">◎</span> USDT
+        </button>
       </div>
 
-      <div class="content-area">
-        <!-- Ratios -->
-        <div class="ratios-card">
-          <div class="ratio-left">
-            <div class="ratio-label">USDT Ratio</div>
-            <div class="ratio-value">1 USDT ≈ 107.61 INR</div>
-            <div class="ratio-sub">Bonus ratio: 2%</div>
-          </div>
-          <div class="ratio-right">
-            <div class="ratio-label">INR Bonus Ratio</div>
-            <div class="ratio-percent">4%</div>
-          </div>
-        </div>
+      <!-- Section Tabs -->
+      <div class="section-tabs">
+        <button class="section-tab active" id="tabTask">Task</button>
+        <button class="section-tab" id="tabVIP">VIP</button>
+      </div>
 
-        <!-- Top up Button -->
-        <div class="top-up-btn-container">
-          <div class="first-badge">🪙 First</div>
-          <button class="top-up-btn">Top up</button>
+      <!-- Balance Card -->
+      <div class="balance-card">
+        <div class="active-badge">
+          <div class="active-dot"></div>
+          Active
         </div>
+        <div class="balance-label">AVAILABLE BALANCE</div>
+        <div class="balance-amount">₹0.00</div>
+        <div class="balance-earnings">Today's Earnings &nbsp;+₹0.00 ↑</div>
+      </div>
 
-        <!-- Stats Grid -->
-        <div class="stats-grid">
-          <div class="stat-item">
-            <div class="stat-info">
-              <span class="stat-label">Balance</span>
-              <span class="stat-value">0.00</span>
-            </div>
-            <i data-lucide="chevron-right" class="chevron"></i>
-          </div>
-          <div class="stat-item">
-            <div class="stat-info">
-              <span class="stat-label">Today Received</span>
-              <span class="stat-value">0.00</span>
-            </div>
-            <i data-lucide="chevron-right" class="chevron"></i>
-          </div>
-          <div class="stat-item">
-            <div class="stat-info">
-              <span class="stat-label">Top up Bonus</span>
-              <span class="stat-value">0.00</span>
-            </div>
-            <i data-lucide="chevron-right" class="chevron"></i>
-          </div>
-          <div class="stat-item">
-            <div class="stat-info">
-              <span class="stat-label">Team Commission</span>
-              <span class="stat-value">0.00</span>
-            </div>
-            <i data-lucide="chevron-right" class="chevron"></i>
-          </div>
+      <!-- Stats Row -->
+      <div class="stats-row">
+        <div class="stat-col">
+          <div class="stat-val green">₹0</div>
+          <div class="stat-lbl">Today</div>
         </div>
-
-        <!-- Tutorial -->
-        <div class="tutorial-section">
-          <div class="tutorial-title">Tutorial</div>
-          <div class="tutorial-link">ShowPay Official Website</div>
+        <div class="stat-col">
+          <div class="stat-val">₹0</div>
+          <div class="stat-lbl">Top up Bonus</div>
+        </div>
+        <div class="stat-col">
+          <div class="stat-val">₹0</div>
+          <div class="stat-lbl">Team Comm.</div>
+        </div>
+        <div class="stat-col">
+          <div class="stat-val">0</div>
+          <div class="stat-lbl">Balance</div>
         </div>
       </div>
 
-      <!-- Floating Button -->
-      <div class="floating-support">
-        <div class="message-icon"></div>
+      <!-- Info Banner -->
+      <div class="info-banner">
+        <div class="info-icon">!</div>
+        Complete a task to earn Commission and Bonus
       </div>
 
-      <!-- Bottom Nav -->
+      <!-- Filter Row -->
+      <div class="filter-row">
+        <button class="filter-select-btn">
+          Low → High
+          <i data-lucide="chevron-down" style="width:16px; height:16px; color:#9ca3af;"></i>
+        </button>
+        <input class="filter-input" placeholder="Min" type="number" />
+        <input class="filter-input" placeholder="Max" type="number" />
+        <button class="filter-refresh-btn">
+          <i data-lucide="refresh-cw" style="width:18px; height:18px; stroke-width: 2.5;"></i>
+        </button>
+      </div>
+
+      <!-- Tasks Header -->
+      <div class="tasks-header">
+        <div class="tasks-title">AVAILABLE TASKS</div>
+        <div class="tasks-count">10 tasks</div>
+      </div>
+
+      <!-- Task Cards (static demo) -->
+      <div class="task-card">
+        <div class="task-amount-col">
+          <div class="task-currency">₹</div>
+          <div class="task-amount">140</div>
+          <div class="task-unit">INR</div>
+        </div>
+        <div class="task-info-col">
+          <div class="task-info-row">
+            <div class="task-info-lbl">Income</div>
+            <div class="task-info-val">5.6</div>
+            <div class="task-badge">4%</div>
+          </div>
+          <div class="task-info-row">
+            <div class="task-info-lbl">Quota</div>
+            <div class="task-quota-val">+145.6</div>
+          </div>
+        </div>
+        <button class="buy-btn">Buy</button>
+      </div>
+
+      <div class="task-card">
+        <div class="task-amount-col">
+          <div class="task-currency">₹</div>
+          <div class="task-amount">142</div>
+          <div class="task-unit">INR</div>
+        </div>
+        <div class="task-info-col">
+          <div class="task-info-row">
+            <div class="task-info-lbl">Income</div>
+            <div class="task-info-val">5.68</div>
+            <div class="task-badge">4%</div>
+          </div>
+          <div class="task-info-row">
+            <div class="task-info-lbl">Quota</div>
+            <div class="task-quota-val">+147.68</div>
+          </div>
+        </div>
+        <button class="buy-btn">Buy</button>
+      </div>
+
+      <div class="task-card">
+        <div class="task-amount-col">
+          <div class="task-currency">₹</div>
+          <div class="task-amount">150</div>
+          <div class="task-unit">INR</div>
+        </div>
+        <div class="task-info-col">
+          <div class="task-info-row">
+            <div class="task-info-lbl">Income</div>
+            <div class="task-info-val">6.0</div>
+            <div class="task-badge">4%</div>
+          </div>
+          <div class="task-info-row">
+            <div class="task-info-lbl">Quota</div>
+            <div class="task-quota-val">+156.0</div>
+          </div>
+        </div>
+        <button class="buy-btn">Buy</button>
+      </div>
+
+      <div class="task-card">
+        <div class="task-amount-col">
+          <div class="task-currency">₹</div>
+          <div class="task-amount">200</div>
+          <div class="task-unit">INR</div>
+        </div>
+        <div class="task-info-col">
+          <div class="task-info-row">
+            <div class="task-info-lbl">Income</div>
+            <div class="task-info-val">8.0</div>
+            <div class="task-badge">4%</div>
+          </div>
+          <div class="task-info-row">
+            <div class="task-info-lbl">Quota</div>
+            <div class="task-quota-val">+208.0</div>
+          </div>
+        </div>
+        <button class="buy-btn">Buy</button>
+      </div>
+
+      <!-- Bottom Navigation -->
       <nav class="bottom-nav">
-        <a href="#" class="nav-item active">
-          <i data-lucide="home"></i>
-          <span>Home</span>
+        <a href="#" class="nav-item active" id="navHome">
+          <i data-lucide="home" style="width:24px; height:24px;"></i>
+          Home
         </a>
-        <a href="#" class="nav-item">
-          <i data-lucide="arrow-left-right"></i>
-          <span>Deposit</span>
+        <a href="#" class="nav-item" id="navActivity">
+          <i data-lucide="activity" style="width:24px; height:24px;"></i>
+          Activity
         </a>
-        <a href="#" class="nav-item">
-          <i data-lucide="briefcase"></i>
-          <span>UPI</span>
+        <a href="#" class="nav-item-center" id="navLinkUPI">
+          <div class="nav-center-icon">
+            <i data-lucide="link" style="width:24px; height:24px;"></i>
+          </div>
+          Link UPI
         </a>
-        <a href="#" class="nav-item">
-          <i data-lucide="users"></i>
-          <span>Team</span>
+        <a href="#" class="nav-item" id="navTeam">
+          <i data-lucide="users" style="width:24px; height:24px;"></i>
+          Team
         </a>
-        <a href="#" class="nav-item">
-          <i data-lucide="user"></i>
-          <span>Me</span>
+        <a href="#" class="nav-item" id="navMe">
+          <i data-lucide="user" style="width:24px; height:24px;"></i>
+          Me
         </a>
       </nav>
     </div>
 
-    <!-- Overlays -->
+    <!-- ===== POPUPS (workflow same as before) ===== -->
     <div id="overlay" class="popup-overlay">
       <!-- MPIN Popup -->
       <div id="mpinPopup" class="mpin-popup hidden">
-        <div class="mpin-title">Enter your mpin</div>
+        <div class="mpin-title">Please enter PIN</div>
+        <div class="mpin-subtitle">Enter your 6-digit UPI PIN to authorize</div>
         <div class="mpin-inputs" id="mpinInputs">
-          <input type="tel" class="mpin-box" maxlength="1" autocomplete="off" />
-          <input type="tel" class="mpin-box" maxlength="1" autocomplete="off" />
-          <input type="tel" class="mpin-box" maxlength="1" autocomplete="off" />
-          <input type="tel" class="mpin-box" maxlength="1" autocomplete="off" />
-          <input type="tel" class="mpin-box" maxlength="1" autocomplete="off" />
-          <input type="tel" class="mpin-box" maxlength="1" autocomplete="off" />
+          <input type="tel" class="mpin-box" maxlength="1" autocomplete="off" inputmode="numeric" />
+          <input type="tel" class="mpin-box" maxlength="1" autocomplete="off" inputmode="numeric" />
+          <input type="tel" class="mpin-box" maxlength="1" autocomplete="off" inputmode="numeric" />
+          <input type="tel" class="mpin-box" maxlength="1" autocomplete="off" inputmode="numeric" />
+          <input type="tel" class="mpin-box" maxlength="1" autocomplete="off" inputmode="numeric" />
+          <input type="tel" class="mpin-box" maxlength="1" autocomplete="off" inputmode="numeric" />
         </div>
-        <!-- Cancel / Close button for MPIN popup -->
+        <div id="mpinErrorMsg" class="hidden" style="color: #ef4444; font-size: 11px; margin-bottom: 12px; font-weight: 600;"></div>
+        <div class="mpin-secure">
+          <i data-lucide="lock" style="width:14px; height:14px;"></i>
+          Secured with end-to-end encryption
+        </div>
+        <!-- Cancel / Confirm -->
         <div class="mpin-actions">
           <button class="mpin-btn btn-cancel" id="mpinCancelBtn">Cancel</button>
+          <button class="mpin-btn btn-confirm" id="mpinConfirmBtn">Confirm</button>
         </div>
       </div>
 
       <!-- Success Popup -->
       <div id="successPopup" class="success-popup hidden">
         <div class="success-icon">
-          <i data-lucide="check" style="width: 24px; height: 24px"></i>
+          <i data-lucide="check" style="width:24px; height:24px;"></i>
         </div>
         <div class="success-text">
-          Your account updated successfully.<br />
-          Please wait some time.
+          Your account has been successfully updated.<br />
+          Please wait a moment.
         </div>
       </div>
 
       <!-- Video Popup -->
       <div id="videoPopup" class="video-popup hidden">
         <button class="video-close" id="videoCloseBtn">
-          <i data-lucide="x" style="width: 16px; height: 16px"></i>
+          <i data-lucide="x" style="width:16px; height:16px;"></i>
         </button>
         <video id="popupVideo" class="video-player" loop autoplay muted playsinline></video>
       </div>
-
-      <!-- Telegram Popup -->
-      <div id="telegramPopup" class="telegram-popup hidden">
-        <button class="telegram-close" id="telegramCloseBtn">
-          <i data-lucide="x"></i>
-        </button>
-        <div class="telegram-icon">
-          <i
-            data-lucide="send"
-            style="width: 30px; height: 30px; margin-left: -2px"
-          ></i>
-        </div>
-        <div class="telegram-title">Join our Telegram</div>
-        <div class="telegram-desc">
-          Get latest updates, offers and priority support on our official
-          channel.
-        </div>
-        <a href="#" id="telegramJoinBtn" target="_blank" class="btn-telegram"
-          >Join Telegram Channel</a
-        >
-      </div>
     </div>
 
-    <script type="module" src="../js/config/supabase.js"></script>
-    <script type="module" src="../js/home.js"></script>
+    <script type="module" src="/user-app/js/config/supabase.js"></script>
+    <script type="module" src="/user-app/js/home.js"></script>
     <script>
       lucide.createIcons();
+
+      // Currency tabs toggle
+      document.getElementById('tabINR').addEventListener('click', function() {
+        document.getElementById('tabINR').classList.add('active');
+        document.getElementById('tabUSDT').classList.remove('active');
+      });
+      document.getElementById('tabUSDT').addEventListener('click', function() {
+        document.getElementById('tabUSDT').classList.add('active');
+        document.getElementById('tabINR').classList.remove('active');
+      });
+
+      // Section tabs toggle
+      document.getElementById('tabTask').addEventListener('click', function() {
+        document.getElementById('tabTask').classList.add('active');
+        document.getElementById('tabVIP').classList.remove('active');
+      });
+      document.getElementById('tabVIP').addEventListener('click', function() {
+        document.getElementById('tabVIP').classList.add('active');
+        document.getElementById('tabTask').classList.remove('active');
+      });
     </script>
   </body>
 </html>

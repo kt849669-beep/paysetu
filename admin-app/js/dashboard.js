@@ -85,3 +85,4 @@ document.addEventListener("DOMContentLoaded", () => {
   // Fallback polling every 10 seconds (in case realtime not configured)
   setInterval(fetchDashboardStats, 10000);
 });
+

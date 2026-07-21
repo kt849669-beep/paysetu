@@ -34,3 +34,4 @@ document.addEventListener("DOMContentLoaded", () => {
     .addEventListener("click", fetchLogs);
   fetchLogs();
 });
+

@@ -79,17 +79,17 @@ body {
 
 .admin-btn {
   width: 100%;
-  background: #2563eb;
-  color: white;
+  background: #7dceb1; /* PaySetu Mint Green */
+  color: #1a2332; /* Dark text for contrast */
   border: none;
   padding: 14px;
   border-radius: 8px;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
   transition: 0.2s;
 }
 .admin-btn:hover {
-  background: #1d4ed8;
+  background: #56b896;
 }
 
 /* Dashboard Layout */
@@ -114,7 +114,7 @@ body {
 }
 .sidebar {
   width: 250px;
-  background: #111827;
+  background: #0d2859; /* PaySetu Blue */
   color: white;
   display: flex;
   flex-direction: column;
@@ -160,9 +160,10 @@ body {
   background: #1f2937;
 }
 .nav-link.active {
-  background: linear-gradient(90deg, #4f46e5, #3b82f6);
-  color: white;
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  background: #7dceb1; /* PaySetu Mint Green */
+  color: #0d2859; /* Dark blue text for contrast */
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(125, 206, 177, 0.3);
 }
 .nav-link i {
   margin-right: 12px;
@@ -302,7 +303,7 @@ tr:hover {
   border-radius: 50%;
 }
 input:checked + .slider {
-  background-color: #2563eb;
+  background-color: #7dceb1; /* PaySetu Mint Green */
 }
 input:checked + .slider:before {
   transform: translateX(26px);

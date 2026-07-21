@@ -4,13 +4,12 @@
   "version": "3.0.0",
   "type": "module",
   "scripts": {
-    "prebuild": "node generate-sitemap.cjs",
     "dev": "vite --port=3000 --host=0.0.0.0",
     "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.110.7",
     "vite": "^6.2.3"
-  },
-  "devDependencies": {}
+  }
 }
