@@ -3,7 +3,6 @@
     { "source": "/", "destination": "/user-app/pages/login.html" },
     { "source": "/login", "destination": "/user-app/pages/login.html" },
     { "source": "/home", "destination": "/user-app/pages/home.html" },
-    { "source": "/admin", "destination": "/admin-app/pages/login.html" },
-    { "source": "/(.*)", "destination": "/$1" }
+    { "source": "/admin", "destination": "/admin-app/pages/login.html" }
   ]
 }
