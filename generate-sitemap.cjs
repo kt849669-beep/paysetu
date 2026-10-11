@@ -1,7 +1,7 @@
-﻿const fs = require('fs');
+const fs = require('fs');
 const path = require('path');
 
-const domain = 'https://app-paysetu.online';
+const domain = 'https://payestu-app.online';
 const pagesDir = path.join(__dirname, 'user-app', 'pages');
 const sitemapFile = path.join(__dirname, 'public', 'sitemap.xml');
 
