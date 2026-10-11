@@ -1,3 +1,4 @@
+# Hosting routes for payestu-app.online
 /login /user-app/pages/login 200
 /home /user-app/pages/home 200
 /admin /admin-app/pages/login 200
