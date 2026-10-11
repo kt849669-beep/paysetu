@@ -1,0 +1,4 @@
+/ /user-app/pages/login.html 200
+/login /user-app/pages/login.html 200
+/home /user-app/pages/home.html 200
+/admin /admin-app/pages/login.html 200
