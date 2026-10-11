@@ -4,8 +4,8 @@ This file serves as memory for AI agents. When a new conversation starts, read t
 
 ## Recent Updates (July 21, 2026)
 1. **Complete Rebranding:** Project renamed from ShowPay to PaySetu.
-   - All ShowPay/payestu-app.online references removed.
-   - New domain placeholder: payestu-app.online
+   - Old branding references removed.
+   - Public domain: payestu-app.online
    - Session keys renamed: paysetu_session, paysetu_admin_token
 
 2. **Login Page Redesign:**
